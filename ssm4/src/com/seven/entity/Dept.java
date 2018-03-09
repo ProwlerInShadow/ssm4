@@ -4,6 +4,7 @@ public class Dept {
 	private int deptId;
 	private String deptName;
 	private String deptAddress;
+	private String newString;
 	public int getDeptId() {
 		return deptId;
 	}
