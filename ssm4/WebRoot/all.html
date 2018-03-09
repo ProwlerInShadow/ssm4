@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>all.html</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+   	<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">   
+	<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">   
+	<script type="text/javascript" src="easyui/jquery.min.js"></script>   
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script> 
+	
+  </head>
+  
+<body> 
+<div id="cc" class="easyui-layout" data-options="fit:true">     
+    <div data-options="region:'north',title:'订单管理系统',split:false" style="height:100px;"></div>   
+    <div data-options="region:'south',title:'Copyright(c) 1995-2018 B2C software Seven. All rights reserved',split:false" style="height:100px;"></div>   
+    <div data-options="region:'east',iconCls:'icon-reload',title:'East',split:false" style="width:100px;"></div>   
+    <div data-options="region:'west',title:'业务管理 ',split:true,minWidth:150" style="width:200px;">
+    	<div id="aa" class="easyui-accordion" data-options="fit:true">   
+ 			<div title="处理中心"  data-options="iconCls:'icon-save',selected:true" style="padding:10px;">   
+				<ul id="tt"></ul>  
+  			</div>   
+		    <div title="客服中心" data-options="iconCls:'icon-tip'" style="padding:10px;">   
+		        2    
+		    </div>   
+		    <div title="物流中心" data-options="iconCls:'icon-redo'" >   
+		        3    
+		    </div>   
+		  </div> 
+    </div>   
+    <div data-options="region:'center',title:'主要内容'" style="padding:5px;background:#eee;">
+    	<div id="tt" class="easyui-tabs" data-options="fit:true">   
+		    <div title="Tab1" data-options="fit:true">   
+		       <table id="dg"></table>    
+		    </div>   
+		    <div title="Tab2" data-options="fit:true">   
+		        tab2    
+		    </div>   
+		    <div title="Tab3" data-options="fit:true">   
+		        <form id="ff" method="post">   
+				    <div>   
+				        <label for="name">Name:</label>   
+				        <input class="easyui-validatebox" type="text" name="name" data-options="required:true" />   
+				    </div>   
+				    <div>   
+				        <label for="email">Email:</label>   
+				        <input class="easyui-validatebox" type="text" name="email" data-options="validType:'email'" />   
+				    </div>   
+				    <input type="button" onclick="sub()" value="提交">
+				</form>     
+		    </div>   
+		</div> 
+    	 
+    </div>   
+</div>  
+</body>  
+<script type="text/javascript">
+	$('#tt').tree({    
+	    url:'tree_data.json',
+	    lines:true,
+	    onClick: function(node){
+			alert(node.text);  // 在用户点击的时候提示
+		}
+	}); 
+	$('#dg').datagrid({    
+	    url:'datagrid_data.json',  
+	    fitColumns:true,  
+	    fit:true,
+	    autoRowHeight:false,// 
+	    striped:true,  //显示斑马线效果
+	    pagination:true,//显示底部分页栏
+	    columns:[[    
+	        {field:'productid',title:'productid',width:100},    
+	        {field:'productname',title:'productname',width:100},    
+	        {field:'unitcost',title:'unitcost',width:100,align:'right'}    
+	    ]]    
+	}); 
+	$('#dg').datagrid({
+		toolbar: [{
+			iconCls: 'icon-edit',
+			handler: function(){alert('编辑按钮')}
+		},'-',{
+			iconCls: 'icon-help',
+			handler: function(){alert('帮助按钮')}
+		},'-',{
+			iconCls: 'icon-help',
+			handler: function(){alert('帮助按钮')}
+		},'-',{
+			iconCls: 'icon-help',
+			handler: function(){alert('帮助按钮')}
+		}]
+	});
+	function sub(){
+		$('#ff').form('submit', {    
+		    url:"dept/test.action",    
+		    onSubmit: function(){    
+		    	alert("提交成功")
+		    },    
+		    success:function(data){    
+		        alert(data)    
+		    }    
+		}); 
+	}
+	
+</script>
+</html>

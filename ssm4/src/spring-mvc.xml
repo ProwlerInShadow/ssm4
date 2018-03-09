@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 
+	DefaultAnnotationHandlerMapping：支持通过url找到相关的action
+	AnnotationMethodHandlerAdapter：支持通过url匹配action定义方法 
+	base-package：定 义扫描的范围,spring可以自动去扫描base-pack下面或者子包下面的java文件，如果扫描到有@Component @Controller@Service等这些注解的类，则把这些类注册为bean
+	-->	
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<!-- 扫描所有的controller 但是不扫描service -->
+	<context:component-scan base-package="com.seven.*">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+
+	
+	<!-- <bean id="uploadProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location" value="classpath:upload.properties"></property>
+	</bean>
+		文件上传使用， 配置multipartResolver，id名称为约定好的
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		配置文件（每次上传的所有文件总大小)大小,单位为b, 1024000表示1000kb 
+		<property name="maxUploadSize" value="102400000" />		
+	</bean> -->
+
+</beans>
