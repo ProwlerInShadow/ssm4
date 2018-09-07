@@ -2,6 +2,8 @@ drop database if exists ssm;
 create database ssm character set utf8;
 use ssm;
 
+
+
 create table dept(
 	dept_id int primary key auto_increment,
 	dept_name varchar(20),
